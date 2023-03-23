@@ -1,3 +1,4 @@
+import { playlistIdState } from "@/atoms/playlistAtom";
 import useSpotify from "@/hooks/useSpotify";
 import {
   BuildingLibraryIcon,
@@ -9,18 +10,24 @@ import {
 } from "@heroicons/react/24/outline";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import SidebarBtn from "./SidebarBtn";
 import SidebarListBtn from "./SidebarListBtn";
 
 const Sidebar = () => {
   const { data: session, status } = useSession();
   const [playlist, setPlaylist] = useState();
+  const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
   const spotifyApi = useSpotify();
 
   useEffect(() => {
+    console.log(playlistId);
+  }, [playlistId]);
+
+  useEffect(() => {
     if (spotifyApi.getAccessToken()) {
-      spotifyApi.getUserPlaylists().then((data) => {
-        console.log(data);
+      spotifyApi.getUserPlaylists().then((res) => {
+        setPlaylist(res.body.items);
       });
     }
   }, [session, spotifyApi]);
@@ -39,7 +46,13 @@ const Sidebar = () => {
         <hr className="border-t-[0.1px] border-gray-700" />
 
         {!playlist < 1 &&
-          playlist.map((list) => <SidebarListBtn key={list.id} list={list} />)}
+          playlist.map((list) => (
+            <SidebarListBtn
+              key={list.id}
+              list={list}
+              setPlaylistId={setPlaylistId}
+            />
+          ))}
       </div>
     </div>
   );

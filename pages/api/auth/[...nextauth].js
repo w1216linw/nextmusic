@@ -8,7 +8,7 @@ const refreshAccessToken = async () => {
     spotifyApi.setRefreshToken(token.refreshToken);
 
     const { body: refreshedToken } = await spotifyApi.refreshAccessToken();
-
+    console.log("Refresh Token", refreshedToken);
     return {
       ...token,
       accessToken: refreshedToken.access_token,
@@ -16,6 +16,7 @@ const refreshAccessToken = async () => {
       refreshToken: refreshedToken.refresh_token ?? token.refreshToken,
     };
   } catch (error) {
+    console.log("Error: refresh token");
     return {
       ...token,
       error: "RefreshAccessTokenError",
@@ -45,13 +46,9 @@ export default nextAuth({
           username: account.providerAccountId,
           accessTokenExpires: account.expires_at * 1000,
         };
-      }
-
-      if (Date.now() < token.accessTokenExpires) {
+      } else if (Date.now() < token.accessTokenExpires) {
         return token;
-      }
-
-      return await refreshAccessToken(token);
+      } else return await refreshAccessToken(token);
     },
     async session({ session, token }) {
       session.user.accessToken = token.accessToken;
