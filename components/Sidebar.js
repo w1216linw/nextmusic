@@ -1,3 +1,4 @@
+import useSpotify from "@/hooks/useSpotify";
 import {
   BuildingLibraryIcon,
   HeartIcon,
@@ -6,73 +7,40 @@ import {
   PlusCircleIcon,
   RssIcon,
 } from "@heroicons/react/24/outline";
+import { signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import SidebarBtn from "./SidebarBtn";
+import SidebarListBtn from "./SidebarListBtn";
 
 const Sidebar = () => {
+  const { data: session, status } = useSession();
+  const [playlist, setPlaylist] = useState();
+  const spotifyApi = useSpotify();
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi.getUserPlaylists().then((data) => {
+        console.log(data);
+      });
+    }
+  }, [session, spotifyApi]);
+
   return (
-    <div className="text-sm p-5 border-r border-gray-700 text-gray-300">
+    <div className="text-sm p-5 border-r border-gray-700 text-gray-300 overflow-y-scroll h-screen scrollbar-hide">
       <div className="space-y-2">
-        <button className="flex space-x-2 items-center hover:text-yellow-400">
-          <HomeIcon className="h-6 w-6" />
-          <p>Home</p>
-        </button>
-        <button className="flex space-x-2 items-center hover:text-yellow-400">
-          <MagnifyingGlassIcon className="h-6 w-6" />
-          <p>Search</p>
-        </button>
-        <button className="flex space-x-2 items-center hover:text-yellow-400">
-          <BuildingLibraryIcon className="h-6 w-6" />
-          <p>Your Library</p>
-        </button>
+        <button onClick={signOut}>Logout</button>
+        <SidebarBtn name="Home" Icon={HomeIcon} />
+        <SidebarBtn name="Search" Icon={MagnifyingGlassIcon} />
+        <SidebarBtn name="Your Library" Icon={BuildingLibraryIcon} />
         <hr className="border-t-[0.1px] border-gray-700" />
-        <button className="flex space-x-2 items-center hover:text-yellow-400">
-          <PlusCircleIcon className="h-6 w-6" />
-          <p>Create Playlist</p>
-        </button>
-        <button className="flex space-x-2 items-center hover:text-yellow-400">
-          <HeartIcon className="h-6 w-6" />
-          <p>Liked Songs</p>
-        </button>
-        <button className="flex space-x-2 items-center hover:text-yellow-400">
-          <RssIcon className="h-6 w-6" />
-          <p>Your Episodes</p>
-        </button>
+        <SidebarBtn name="Create Playlist" Icon={PlusCircleIcon} />
+        <SidebarBtn name="Liked Songs" Icon={HeartIcon} />
+        <SidebarBtn name="Your Episodes" Icon={RssIcon} />
         <hr className="border-t-[0.1px] border-gray-700" />
+
+        {!playlist < 1 &&
+          playlist.map((list) => <SidebarListBtn key={list.id} list={list} />)}
       </div>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
-      <p className="cursor-pointer hover:text-white">Playlist name...</p>
     </div>
   );
 };
