@@ -36,7 +36,7 @@ const Center = () => {
           <h2>{session?.user.name}</h2>
         </div>
       </header>
-      <section className="flex-grow flex items-end space-x-7 bg-gradient-to-b to-black from-green-300 h-80 text-white p-8">
+      <section className="flex-grow flex items-end space-x-7 bg-gradient-to-b to-black from-green-300 h-80 text-white p-5">
         <div className="flex items-center gap-4">
           <img
             className="w-32 h-32"
