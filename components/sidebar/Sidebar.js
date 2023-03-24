@@ -21,10 +21,6 @@ const Sidebar = () => {
   const spotifyApi = useSpotify();
 
   useEffect(() => {
-    console.log(playlistId);
-  }, [playlistId]);
-
-  useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       spotifyApi.getUserPlaylists().then((res) => {
         setPlaylist(res.body.items);
@@ -33,7 +29,7 @@ const Sidebar = () => {
   }, [session, spotifyApi]);
 
   return (
-    <div className="text-sm p-5 border-r border-gray-700 text-gray-300 overflow-y-scroll h-screen scrollbar-hide">
+    <div className="text-xs md:text-sm lg:text-base p-5 border-r border-gray-700 text-gray-300 overflow-y-scroll h-screen scrollbar-hide hidden md:inline-flex">
       <div className="space-y-2">
         <button onClick={signOut}>Logout</button>
         <SidebarBtn name="Home" Icon={HomeIcon} />
