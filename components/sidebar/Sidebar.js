@@ -8,7 +8,7 @@ import {
   PlusCircleIcon,
   RssIcon,
 } from "@heroicons/react/24/outline";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import SidebarBtn from "./SidebarBtn";
@@ -29,9 +29,8 @@ const Sidebar = () => {
   }, [session, spotifyApi]);
 
   return (
-    <div className="text-xs md:text-sm lg:text-base p-5 border-r border-gray-700 text-gray-300 overflow-y-scroll h-screen scrollbar-hide hidden md:inline-flex">
+    <div className="text-sm lg:text-base p-5 border-r border-gray-700 text-gray-300 overflow-y-scroll scrollbar-hide min-w-max hidden md:inline-flex">
       <div className="space-y-2">
-        <button onClick={signOut}>Logout</button>
         <SidebarBtn name="Home" Icon={HomeIcon} />
         <SidebarBtn name="Search" Icon={MagnifyingGlassIcon} />
         <SidebarBtn name="Your Library" Icon={BuildingLibraryIcon} />

@@ -4,8 +4,8 @@ import SpotifyProvider from "next-auth/providers/spotify";
 
 const refreshAccessToken = async () => {
   try {
-    spotifyApi.setAccessToken(token.accessToken);
-    spotifyApi.setRefreshToken(token.refreshToken);
+    // spotifyApi.setAccessToken(token.accessToken);
+    // spotifyApi.setRefreshToken(token.refreshToken);
 
     const { body: refreshedToken } = await spotifyApi.refreshAccessToken();
     console.log("Refresh Token", refreshedToken);
