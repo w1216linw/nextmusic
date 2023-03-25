@@ -1,12 +1,11 @@
 const { currentTrackIdState } = require("@/atoms/songAtom");
 const { useState, useEffect } = require("react");
-const { useRecoilState } = require("recoil");
+const { useRecoilState, useRecoilValue } = require("recoil");
 const { default: useSpotify } = require("./useSpotify");
 
 const useSongInfo = () => {
   const spotifyApi = useSpotify();
-  const [currentTrackId, setCurrentTrackId] =
-    useRecoilState(currentTrackIdState);
+  const currentTrackId = useRecoilValue(currentTrackIdState);
   const [songInfo, setSongInfo] = useState(null);
 
   useEffect(() => {
