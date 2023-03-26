@@ -30,7 +30,7 @@ const Sidebar = () => {
 
   return (
     <div className="text-sm lg:text-base p-5 border-r border-gray-700 text-gray-300 overflow-y-scroll scrollbar-hide min-w-max hidden md:inline-flex">
-      <div className="space-y-2">
+      <div className="space-y-2 w-36">
         <SidebarBtn name="Home" Icon={HomeIcon} />
         <SidebarBtn name="Search" Icon={MagnifyingGlassIcon} />
         <SidebarBtn name="Your Library" Icon={BuildingLibraryIcon} />

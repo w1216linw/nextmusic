@@ -2,10 +2,10 @@ const SidebarListBtn = ({ list, setPlaylistId }) => {
   return (
     <button
       onClick={() => setPlaylistId(list.id)}
-      className="flex space-x-2 items-center hover:text-yellow-400"
+      className="flex gap-2 items-center hover:text-yellow-400"
     >
       <img
-        className="h-5 w-5"
+        className="h-6 w-6"
         src={
           list.images[2] ? list.images[2].url : "https://via.placeholder.com/64"
         }

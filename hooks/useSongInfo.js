@@ -23,6 +23,17 @@ const useSongInfo = () => {
     })();
   }, [currentTrackId, spotifyApi]);
 
+  // useEffect(() => {
+  //   spotifyApi
+  //     .getMyCurrentPlayingTrack()
+  //     .then((res) => {
+  //       const remain = res.duration_ms - res.progress_ms;
+  //       const timer = setTimeout(() => {
+
+  //       }, remain)
+  //     });
+  // }, []);
+
   return songInfo;
 };
 
