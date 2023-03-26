@@ -8,22 +8,20 @@ const Player = () => {
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayState);
   const [queue, setQueue] = useRecoilState(songsQueue);
   return (
-    <div className="bg-gradient-to-b from-black to-slate-800 ">
-      <SpotifyPlayer
-        styles={{
-          bgColor: "#1e293b",
-          color: "gray",
-          trackArtistColor: "gray",
-          trackNameColor: "white",
-        }}
-        play={isPlaying}
-        callback={(state) => {
-          if (!state.isPlaying) setIsPlaying(false);
-        }}
-        token={session?.user?.accessToken}
-        uris={queue}
-      />
-    </div>
+    <SpotifyPlayer
+      styles={{
+        bgColor: "#1e293b",
+        color: "gray",
+        trackArtistColor: "gray",
+        trackNameColor: "white",
+      }}
+      play={isPlaying}
+      callback={(state) => {
+        if (!state.isPlaying) setIsPlaying(false);
+      }}
+      token={session?.user?.accessToken}
+      uris={queue}
+    />
   );
 };
 

@@ -1,21 +1,15 @@
 import { playlistIdState, playlistState } from "@/atoms/playlistAtom";
-import { songsQueue } from "@/atoms/songAtom";
 import useSpotify from "@/hooks/useSpotify";
-import { PlayCircleIcon } from "@heroicons/react/24/solid";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import AccountHeader from "./AccountHeader";
+import ListTitle from "./ListTitle";
 import Songs from "./Songs";
 
 const Center = () => {
   const spotifyApi = useSpotify();
   const playlistId = useRecoilValue(playlistIdState);
   const [playlist, setPlaylist] = useRecoilState(playlistState);
-  const [queue, setQueue] = useRecoilState(songsQueue);
-
-  const handlePlayAll = () => {
-    setQueue([playlist.uri]);
-  };
 
   useEffect(() => {
     spotifyApi
@@ -29,23 +23,7 @@ const Center = () => {
   return (
     <div className="flex-grow text-white overflow-y-scroll scrollbar-hide">
       <AccountHeader />
-      <section className="flex-grow flex items-end space-x-7 bg-gradient-to-b to-black from-green-300 h-80 text-white p-5">
-        <div className="flex items-center gap-4">
-          <img
-            className="w-32 h-32"
-            src={
-              playlist?.images[1]
-                ? playlist.images[1].url
-                : "https://via.placeholder.com/64"
-            }
-            alt="thumbnail of playlist"
-          />
-          <h1 className="text-base md:text-lg lg:text-2xl">{playlist?.name}</h1>
-          <button onClick={handlePlayAll}>
-            <PlayCircleIcon className="h-10 text-green-500" />
-          </button>
-        </div>
-      </section>
+      <ListTitle />
       <Songs />
     </div>
   );
