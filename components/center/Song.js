@@ -1,23 +1,17 @@
-import { currentTrackIdState, isPlayState } from "@/atoms/songAtom";
+import { isPlayState, songsQueue } from "@/atoms/songAtom";
 import useSpotify from "@/hooks/useSpotify";
 import { formatTime } from "@/utilities/formatTime";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useRecoilState } from "recoil";
 
-const Song = ({ song, idx }) => {
+const Song = ({ song }) => {
   const spotifyApi = useSpotify();
-  const [currentTrackId, setCurrentTrackId] =
-    useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayState);
+  const [queue, setQueue] = useRecoilState(songsQueue);
 
   const handlePlay = () => {
-    setCurrentTrackId(song.track.id);
+    setQueue([song.track.uri]);
     setIsPlaying(true);
-    // spotifyApi
-    //   .play({
-    //     uris: [song.track.uri],
-    //   })
-    //   .catch((e) => console.error("Error: ", e));
   };
 
   const handleAdd = async () => {
