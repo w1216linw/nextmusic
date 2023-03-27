@@ -1,9 +1,11 @@
-const SidebarBtn = ({ Icon, name }) => {
+import Link from "next/link";
+
+const SidebarBtn = ({ Icon, name, to }) => {
   return (
-    <button className="flex gap-2 items-center hover:text-yellow-400">
+    <Link href={to} className="flex gap-2 items-center hover:text-yellow-400">
       <Icon className="h-6 w-6" />
       <p>{name}</p>
-    </button>
+    </Link>
   );
 };
 
