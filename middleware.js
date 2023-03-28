@@ -10,5 +10,5 @@ export default async function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/", "/playlist"],
+  matcher: ["/", "/playlist", "/liked", "/search"],
 };

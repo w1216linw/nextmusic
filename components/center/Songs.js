@@ -7,7 +7,7 @@ const Songs = () => {
   return (
     <div>
       {playlist?.tracks?.items.map((song) => (
-        <Song key={song.track.id} song={song} />
+        <Song key={song.track.id} song={song.track} />
       ))}
     </div>
   );

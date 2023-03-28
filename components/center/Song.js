@@ -8,15 +8,14 @@ const Song = ({ song }) => {
   const spotifyApi = useSpotify();
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayState);
   const [queue, setQueue] = useRecoilState(songsQueue);
-
   const handlePlay = () => {
-    setQueue([song.track.uri]);
+    setQueue([song.uri]);
     setIsPlaying(true);
   };
 
   const handleAdd = async () => {
     const playQueue = await spotifyApi.getMyCurrentPlaybackState();
-    await spotifyApi.addToQueue(song.track.uri, {
+    await spotifyApi.addToQueue(song.uri, {
       device_id: playQueue.body.device.id,
     });
   };
@@ -36,17 +35,17 @@ const Song = ({ song }) => {
         <div className="flex gap-5 items-center">
           <img
             className="w-10 h-10"
-            src={song.track.album.images[2].url}
+            src={song.album.images[2].url}
             alt="album cover"
           />
           <div>
-            <p className="truncate ">{song.track.name}</p>
-            <p className="text-gray-400">{song.track.artists[0].name}</p>
+            <p className="truncate ">{song.name}</p>
+            <p className="text-gray-400">{song.artists[0].name}</p>
           </div>
         </div>
         <div className="flex items-center">
-          <p className="hidden lg:inline-flex">{song.track.album.name}</p>
-          <p className="ml-auto">{formatTime(song.track.duration_ms)}</p>
+          <p className="hidden lg:inline-flex">{song.album.name}</p>
+          <p className="ml-auto">{formatTime(song.duration_ms)}</p>
         </div>
       </div>
     </div>
