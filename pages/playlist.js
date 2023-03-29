@@ -1,5 +1,4 @@
 import { playlistIdState, playlistState } from "@/atoms/playlistAtom";
-import AccountHeader from "@/components/center/AccountHeader";
 import ListTitle from "@/components/center/ListTitle";
 import Songs from "@/components/center/Songs";
 import useSpotify from "@/hooks/useSpotify";
@@ -22,7 +21,6 @@ const Center = () => {
 
   return (
     <div className="flex-grow text-white overflow-y-scroll scrollbar-hide">
-      <AccountHeader />
       <ListTitle />
       <Songs />
     </div>

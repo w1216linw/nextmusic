@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import AccountHeader from "../center/AccountHeader";
 import Player from "../player/Player";
 import Sidebar from "../sidebar/Sidebar";
 
@@ -10,6 +11,7 @@ const Layout = ({ children }) => {
     <div className="flex flex-col h-screen bg-black">
       <main className="flex overflow-hidden flex-grow">
         <Sidebar />
+        <AccountHeader />
         {children}
       </main>
       <footer>
